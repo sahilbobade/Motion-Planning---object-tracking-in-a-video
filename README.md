@@ -7,3 +7,11 @@ This project aims to track objects in a vide and extract following information:
 5. LOS angle
 6. LOS angular rate
 7. LOS range rate
+
+How to use:
+
+1. Run the program Motion_tracking.py
+2. click and drag reactange on car1 and hit enter
+3. in window2 click and drag rectange on car2 and hit enter
+4. wait for tracking to end
+5. plots will appear
