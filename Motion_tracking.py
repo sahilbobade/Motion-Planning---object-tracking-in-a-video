@@ -3,6 +3,7 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 
+#for smoothing the graphs
 def smooth(data, window_size=10):
     if len(data) >= window_size:
         data_array = np.array(data)
@@ -10,7 +11,7 @@ def smooth(data, window_size=10):
         return np.convolve(data_array, weights, mode='valid').tolist()
     return data
 
-
+#LOS calculations
 def calculate_los_metrics(center1, center2, prev_center1, prev_center2, dt):
     dx = center2[0] - center1[0]
     dy = center2[1] - center1[1]
@@ -32,12 +33,14 @@ def calculate_los_metrics(center1, center2, prev_center1, prev_center2, dt):
 
     return distance, angle, range_rate, angular_rate
 
+#for storing information
 trajectories1, velocities1, accelerations1 = [], [], []
 trajectories2, velocities2, accelerations2 = [], [], []
 smoothed_distances, smoothed_angles, smoothed_range_rates, smoothed_angular_rates = [], [], [], []
 
 time_array = [0]
 
+#main tracking and analysis loop
 def track_and_analyze(video_path, output_folder):
     global trajectories1, velocities1, accelerations1, trajectories2, velocities2, accelerations2, time_array
     global smoothed_distances, smoothed_angles, smoothed_range_rates, smoothed_angular_rates 
@@ -150,6 +153,7 @@ def track_and_analyze(video_path, output_folder):
 track_and_analyze("final.mp4",
                   "frames/")  
 
+#smoothing for plotting
 velocities1 = smooth(velocities1, window_size= 70)
 velocities2 = smooth(velocities2, window_size= 60)
 time_array1 = time_array[0:len(velocities1)]
@@ -162,6 +166,8 @@ accelerations1 = smooth(accelerations1, window_size= 40)
 accelerations2 = smooth(accelerations2,window_size= 40)
 time_array_acc1 = time_array[0:len(accelerations1)]
 time_array_acc2 = time_array[0:len(accelerations2)]
+
+#plots
 plt.figure(1)
 plt.plot(time_array1, velocities1, label='Velocity1')
 plt.plot(time_array2, velocities2, label='Velocity2')
