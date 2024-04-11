@@ -150,7 +150,7 @@ def track_and_analyze(video_path, output_folder):
     cv2.destroyAllWindows()
 
 
-track_and_analyze("final.mp4",
+track_and_analyze("test.mp4",
                   "frames/")  
 
 #smoothing for plotting
